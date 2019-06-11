@@ -1,0 +1,86 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mygekko_light',{
+        category: 'MyGekko',
+        color: '#87A980',
+        defaults: {
+            name: {value:""},
+            itemid: {value:""},
+            server: {value:"", type:"mygekko_server", required:true},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "mygekko_light.png",
+        paletteLabel: "Light",        
+        label: function() {
+            return this.name||"mygekko_light";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mygekko_light">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-itemid"><i class="icon-tag"></i> ItemId</label>
+        <input type="text" id="node-input-itemid" placeholder="ItemId">
+    </div>    
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-tag"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="Server">
+    </div>
+    <div class="form-tips"><p><strong>Important!</strong></p><p><strong>Auto ItemId assigning</strong></p>
+        <p>To use Auto assigning of the MyGekko-ItemId use the identical <strong>Name</strong> as used in MyGekko,
+        leave the <strong>Field ItemID</strong> blank.</p>
+        <p>You can configure the MyGekko-<strong>ItemId</strong> directly, if you use this option, you can set an 
+            individual <strong>Name</strong> independent from the naming in MyGekko.</p>        
+    </div>    
+</script>
+
+<script type="text/x-red" data-help-name="mygekko_light">
+    <p>A simple node that represents a light from MyGekko-Homeautomation-System. Set and get values over QueryApi.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt class="optional">msg.payload <span class="property-type">boolean</span></dt>
+        <dd><strong>true</strong> to switch on,<br/>
+            <strong>false</strong> to switch off.<br/>
+            Will only be used if <code>msg.state</code> is not set.
+        </dd>        
+        <dt class="optional">msg.state <span class="property-type">boolean</span></dt>
+        <dd><strong>true</strong> for switching on,<br/>
+            <strong>false</strong> for switching off.<br/>
+            This property overrides <code>msg.payload</code> if set.
+        </dd>
+        <dt class="optional">msg.dimvalue <span class="property-type">number</span></dt>
+        <dd><strong>%-value</strong> for dimming between 0 - 100%
+        </dd>   
+        <dt class="optional">msg.rgbvalue <span class="property-type">number</span></dt>
+        <dd><strong>24-Bit-RGB-Color-Value</strong> sets the color of the lamp
+        </dd>                 
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload.item <span class="property-type">string</span></dt>
+        <dd>the <strong>itemid</strong> from MyGekko-QueryApi
+        </dd>
+        <dt>msg.payload.name <span class="property-type">string</span></dt>
+        <dd>the human readable <strong>name</strong> of this lamp
+        </dd>
+        <dt>msg.payload.state <span class="property-type">boolean</span></dt>
+        <dd>the switching-state of the lamp.<br/>
+            <strong>true</strong> if lamp is switched on,<br/>
+            <strong>false</strong> if lamp is switched off.
+        </dd>
+        <dt>msg.payload.dimvalue <span class="property-type">number</span></dt>
+        <dd>the actual value of dimming-state in <strong>% between 0 - 100%</strong>
+        </dd>
+        <dt>msg.payload.rgbvalue <span class="property-type">number</span></dt>
+        <dd>the actual color-value of the lamp as <strong>24-Bit-RGB-Value</strong>
+        </dd>
+    </dl>
+    <h3>Details</h3>
+    <p>For <strong>simple switching</strong> on/off the lamp, just set <code>msg.payload</code> to <strong>true|false</strong> on input.</p>
+    <p><strong>Additionally</strong> <code>msg.dimvalue</code> for <strong>dimming</strong> the lamp and <code>msg.rgbvalue</code> for setting <strong>color</strong> can be used on input.</p>
+    <p>For further processing the node generates a <code>msg</code><strong>on every value-change</strong> received over the MyGekko-QueryApi.</p>
+</script>

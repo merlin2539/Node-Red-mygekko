@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mygekko_profile',{
+        category: 'MyGekko',
+        color: '#87A980',
+        defaults: {
+            name: {value:""},
+            server: {value:"", type:"mygekko_server", required:true},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "mygekko_profile.png",
+        paletteLabel: "Profile",
+        label: function() {
+            return this.name||"mygekko_profile";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mygekko_profile">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-tag"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="Server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="mygekko_profile">
+    <p>A simple node that represents the actual profile from MyGekko-Homeautomation-System. Get and set value over QueryApi.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt class="optional">msg.payload <span class="property-type">number</span></dt>
+        <dd><strong>0</strong> for "away",<br/>
+            <strong>1</strong> for "at Home".<br/>
+            Will only be used if <code>msg.profileid</code> is not set.
+        </dd>        
+        <dt class="optional">msg.profileid <span class="property-type">number</span></dt>
+        <dd><strong>0</strong> for "away",<br/>
+            <strong>1</strong> for "at Home".<br/>
+            This property overrides <code>msg.payload</code> if set.
+        </dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload.item <span class="property-type">string</span></dt>
+            <dd>the <strong>itemid</strong> from MyGekko-QueryApi
+            </dd>
+        <dt>msg.payload.name <span class="property-type">string</span></dt>
+            <dd>the human readable <strong>name</strong> of this node
+            </dd>        
+        <dt>msg.payload.profileid <span class="property-type">number</span></dt>
+            <dd>The actual Profile-ID of MyGekko.<br/>
+                <strong>0</strong> = Away,<br/>
+                <strong>1</strong> = At Home
+            </dd>
+        <dt>msg.payload.profile <span class="property-type">string</span></dt>
+            <dd>The String representation of the Profile-ID.<br/>
+                Away, At Home
+            </dd>
+    </dl>
+    <h3>Details</h3>
+    <p>For further processing the node generates a <code>msg</code><strong>on every value-change</strong> received over the MyGekko-QueryApi.</p>
+</script>

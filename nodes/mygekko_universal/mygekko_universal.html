@@ -1,0 +1,37 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mygekko_universal',{
+        category: 'MyGekko',
+        color: '#87A980',
+        defaults: {
+            name: {value:""},
+            server: {value:"", type:"mygekko_server", required:true},
+        },
+        outputs:1,
+        icon: "mygekko_universal.png",
+        paletteLabel: "Universal",
+        label: function() {
+            return this.name||"mygekko_universal";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mygekko_universal">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-tag"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="Server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="mygekko_universal">
+    <p>A simple node that produces a <code>msg.payload.queryapi</code> with the complete json-response on every value-change on any item from MyGekko-Homeautomation-System. Get values over QueryApi.  Use with care, produces a high message payload.</p>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload.queryapi <span class="property-type">object</span></dt>
+            <dd>the complete json-response
+            </dd>        
+    </dl>
+</script>

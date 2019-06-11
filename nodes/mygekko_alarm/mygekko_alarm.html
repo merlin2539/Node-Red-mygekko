@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mygekko_alarm',{
+        category: 'MyGekko',
+        color: '#87A980',
+        defaults: {
+            name: {value:""},
+            server: {value:"", type:"mygekko_server", required:true},
+        },
+        outputs:1,
+        icon: "mygekko_alarm.png",
+        paletteLabel: "Alarm",
+        label: function() {
+            return this.name||"mygekko_alarm";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mygekko_alarm">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-tag"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="Server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="mygekko_alarm">
+    <p>A simple node that represents the alarm from MyGekko-Homeautomation-System. Get values over QueryApi.</p>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload.item <span class="property-type">string</span></dt>
+            <dd>the <strong>itemid</strong> from MyGekko-QueryApi
+            </dd>
+        <dt>msg.payload.name <span class="property-type">string</span></dt>
+            <dd>the human readable <strong>name</strong> of this node
+            </dd>        
+        <dt>msg.payload.alarmid <span class="property-type">number</span></dt>
+            <dd>The Status-ID of the alarm-component of MyGekko.<br/>
+                <strong>0</strong> = OK,<br/>
+                <strong>2</strong> = ACKNOWLEDGED,<br/>
+                <strong>3</strong> = ALARM
+            </dd>
+        <dt>msg.payload.alarm <span class="property-type">string</span></dt>
+            <dd>The String representation of the Status-ID.<br/>
+                OK, ACKNOWLEDGED, ALARM
+            </dd>
+    </dl>
+    <h3>Details</h3>
+    <p>For further processing the node generates a <code>msg</code><strong>on every value-change</strong> received over the MyGekko-QueryApi.</p>
+</script>

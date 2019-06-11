@@ -1,0 +1,31 @@
+{
+  "name": "node-red-contrib-mygekko",
+  "version": "1.0.5",
+  "description": "Connects to the Query-Api of the homeautomation system MyGEKKO.",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "node-red",
+    "mygekko",
+    "my gekko",
+    "query api",
+    "gekko",
+    "homeautomation"
+  ],
+  "author": "Martin Maier, byteschreinerei",
+  "license": "ISC",
+  "node-red": {
+    "nodes": {
+      "mygekko_server": "nodes/mygekko_server/mygekko_server.js",
+      "mygekko_alarm": "nodes/mygekko_alarm/mygekko_alarm.js",
+      "mygekko_profile": "nodes/mygekko_profile/mygekko_profile.js",
+      "mygekko_light": "nodes/mygekko_light/mygekko_light.js",
+      "mygekko_blind": "nodes/mygekko_blind/mygekko_blind.js",
+      "mygekko_load": "nodes/mygekko_load/mygekko_load.js",
+      "mygekko_action": "nodes/mygekko_action/mygekko_action.js",
+      "mygekko_universal": "nodes/mygekko_universal/mygekko_universal.js"
+
+    }
+  }
+}

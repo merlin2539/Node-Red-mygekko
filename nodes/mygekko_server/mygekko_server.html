@@ -1,0 +1,68 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mygekko_server',{
+        category: 'config',
+        defaults: {
+            active: {value: true},
+            api: {value: "plus", required: true},
+            host: {value:"live.my-gekko.com",required:true},
+            interval: {value: 5, required:true, validate:RED.validators.number()}
+        },
+         credentials: {
+            gekkoid: {type:"text"},
+            username: {type:"text"},
+            password: {type:"password"}
+        },
+        paletteLabel: "Server",        
+        label: function() {
+            return this.host;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mygekko_server">
+    <div class="form-row">
+        <label for="node-config-input-active"><i class="fa fa-server"></i> Polling Active</label>
+        <input type="checkbox" id="node-config-input-active">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-api"><i class="icon-bookmark"></i> API</label>
+        <select id="node-config-input-api">
+            <option value="plus">myGekko-Plus-Services</option>
+            <option value="local">local Query-API</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-server"></i> Host</label>
+        <input type="text" id="node-config-input-host">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-interval"><i class="fa fa-time"></i> Interval</label>
+        <input type="text" id="node-config-input-interval">
+    </div>
+     <div class="form-row">
+        <label for="node-config-input-gekkoid"><i class="fa fa-tag"></i> MyGekko-Id</label>
+        <input type="text" id="node-config-input-gekkoid">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-username"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-config-input-username">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-key"></i> Key / Password</label>
+        <input type="password" id="node-config-input-password">
+    </div>
+    <div class="form-tips">
+        <strong>Active</strong>
+        <p>For dev, polling can be deactivated</p>
+        <strong>Host</strong>
+        <p>Use - live.my-gekko.com - for myGekko-Plus-Services<br/>Use - your-local-mygekko-ip - for local Query-API</p>
+        <strong>Interval</strong>
+        <p>Interval in seconds for polling the Query-API.</p>
+        <strong>MyGekko-Id</strong>
+        <p>Only needed for myGekko-Plus-Services.<br/>Unique MyGekko-Id of your Device for myGekko-Plus-Services</p>
+        <strong>Username</strong>
+        <p>Username for the Query-API.</p>
+        <strong>Key / Password</strong>
+        <p>For local Query-API -> your Password.<br/>For myGekko-Plus-Services -> your generated Key.</p>
+    </div>
+</script>
